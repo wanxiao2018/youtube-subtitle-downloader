@@ -1,0 +1,7 @@
+{
+  "name": "youtube-subtitles",
+  "description": "Download YouTube video subtitles and convert to clean Markdown for language learning. Supports any language. Manual subtitles prioritized.",
+  "version": "1.0.0",
+  "repository": "https://github.com/wanxiao2018/youtube-subtitle-downloader",
+  "skill": "../SKILL.md"
+}
