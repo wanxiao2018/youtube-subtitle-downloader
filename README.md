@@ -222,6 +222,10 @@ Expected. Manual subtitles are always preferred when available.
 - [jq](https://jqlang.github.io/jq/)
 - Chrome browser (for cookie extraction)
 
+## Community
+
+This project is shared with [LINUX DO](https://linux.do/) — a community for developers and open source enthusiasts.
+
 ## License
 
 MIT
