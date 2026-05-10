@@ -1,6 +1,8 @@
+[English](README.md) | [中文](README.zh-CN.md)
+
 # YouTube Subtitle Downloader
 
-A Claude Code skill for downloading YouTube subtitles and converting them into clean, structured Markdown for language learning.
+A Claude Code / Hermes Agent skill for downloading YouTube subtitles and converting them into clean, structured Markdown for language learning.
 
 **Manual subtitles first, auto-generated as fallback.**
 
@@ -39,7 +41,20 @@ git clone https://github.com/wanxiao2018/youtube-subtitle-downloader.git \
   ~/.claude/skills/youtube-subtitle-downloader
 ```
 
-### As Standalone CLI (No Claude Code)
+### Via Hermes Agent
+
+```bash
+# Clone the repo
+git clone https://github.com/wanxiao2018/youtube-subtitle-downloader.git
+
+# Copy skill to Hermes skills directory
+mkdir -p ~/.hermes/skills/media/youtube-subtitle-downloader
+cp youtube-subtitle-downloader/SKILL.md ~/.hermes/skills/media/youtube-subtitle-downloader/
+```
+
+Or just ask Hermes: "Download subtitles for this YouTube video"
+
+### As Standalone CLI
 
 ```bash
 git clone https://github.com/wanxiao2018/youtube-subtitle-downloader.git
@@ -113,6 +128,30 @@ python3 scripts/srt_to_md.py \
   --title "Video Title" \
   --video-url "URL" \
   --output output.md
+```
+
+### Batch Download (Build Your Corpus)
+
+```bash
+# Download all subtitles from a playlist
+yt-dlp --cookies-from-browser chrome \
+  --write-sub --sub-lang ru --sub-format srt \
+  --skip-download --no-write-auto-sub \
+  -o "corpus/%(title)s.%(ext)s" \
+  "https://youtube.com/playlist?list=xxx"
+
+# Batch convert to Markdown
+for srt in corpus/*.srt; do
+  python3 scripts/srt_to_md.py --srt "$srt" --output "${srt%.srt}.md"
+done
+```
+
+### Multilingual Alignment
+
+```bash
+python3 scripts/srt_to_md_multilang.py \
+  --ru sub.ru.srt --en sub.en.srt --zh sub.zh.srt \
+  --title "Video Title" --video-url "URL" --output learn.md
 ```
 
 ## Output Format
